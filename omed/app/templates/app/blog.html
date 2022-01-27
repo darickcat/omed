@@ -1,0 +1,12 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+<h2>{{ title }}</h2> <br />
+{% for post in posts %}
+<hr/>
+<div class="">
+<h2><a href="{% url 'blogpost' parametr=post.id %}">{{ post.title }}</a> </h2>
+<p> {{post.posted}} </p>
+</div>
+<p> {{post.description}} </p>
+{% endfor %}
+{% endblock %}

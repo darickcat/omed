@@ -1,0 +1,30 @@
+﻿{% extends "app/layout.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<h2> {{post_1.title}} </h2>
+{% if post_1.image and post_1.image.url != '/media/temp.jpg' %}
+<img style="position:static; height: 50%; width: 50%; top:0;left 0;" src="{{ post_1.image.url }}" alt="" />
+{% endif %}
+<p> {{post_1.content|linebreaksbr}} </p> {# вывод текста по абзацам#}
+<hr>
+{% if user.is_authenticated %}
+ <h3>Добавить комментарий</h3>
+ <form method="POST" >{% csrf_token %} {# защита от атак CSRF#}
+ <div class="form-comment">
+ {{form}}
+ <button type="submit" class="save btn btn-default" > Отправить комментарий </button>
+ </div>
+ </form>
+{% else %}
+ <h3> Для добавления своего комментария, пожалуйста, авторизуйтесь
+</h3>
+{% endif %}
+{% for comment in comments %}
+<div class="comment" > 
+	<h5>  {{comment.author}}, {{comment.date}} </h5>
+	<p> {{comment.text}} </p>
+</div>
+{% endfor %}
+{% endblock %}

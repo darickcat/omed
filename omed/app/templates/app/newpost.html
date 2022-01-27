@@ -1,0 +1,12 @@
+﻿{% extends "app/layout.html" %}
+
+{% load widget_tweaks %}
+{% block content %}
+ <h3>Добавить статью</h3>
+ <form method="POST" enctype ="multipart/form-data" >{% csrf_token %} {# защита от атак CSRF#}
+ <div class="form-comment">
+ {{form.as_p}}
+ <button type="submit" class="save btn btn-default" > Сохранить </button>
+ </div>
+ </form>
+{% endblock %}
